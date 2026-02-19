@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PawsFirst Veterinary Clinic — Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Fraunces:ital,wght@0,400;0,600;1,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --green-dark: #1B4332;
+      --green: #2D6A4F;
+      --green-mid: #40916C;
+      --green-light: #52B788;
+      --green-pale: #D8F3DC;
+      --cream: #FAFAF5;
+      --text: #1A1A1A;
+      --muted: #6B7280;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      background: white;
+      border-bottom: 1px solid #E8F5E9;
+      padding: 0 48px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--green), var(--green-light));
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+    }
+    .nav-logo-text {
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--green-dark);
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--green); }
+    .nav-cta {
+      background: var(--green);
+      color: white !important;
+      padding: 8px 18px;
+      border-radius: 8px;
+    }
+    .nav-cta:hover { background: var(--green-dark) !important; color: white !important; }
+
+    /* HERO */
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--green-pale);
+      color: var(--green-dark);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-size: 52px;
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      color: var(--green-dark);
+      margin-bottom: 20px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--green-mid);
+    }
+    .hero p {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 32px;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--green), var(--green-mid));
+      color: white;
+      padding: 13px 24px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 14px rgba(45,106,79,0.35);
+    }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(45,106,79,0.45); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--green);
+      padding: 13px 24px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      border: 2px solid var(--green-pale);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--green-light); background: var(--green-pale); }
+
+    /* Hero image/illustration */
+    .hero-visual {
+      position: relative;
+    }
+    .hero-card {
+      background: white;
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.1), 0 4px 16px rgba(45,106,79,0.1);
+      border: 1px solid #E8F5E9;
+    }
+    .hero-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #F0F9F1;
+    }
+    .avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green), var(--green-light));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .stat-row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .stat-box {
+      flex: 1;
+      background: var(--green-pale);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: 'Fraunces', serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--green-dark);
+    }
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .upcoming-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: #F9FAFB;
+      border-radius: 10px;
+      margin-bottom: 8px;
+    }
+    .upcoming-icon {
+      width: 36px; height: 36px;
+      background: var(--green-pale);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+    .upcoming-name { font-weight: 500; font-size: 13px; }
+    .upcoming-time { font-size: 12px; color: var(--muted); }
+    .upcoming-status {
+      margin-left: auto;
+      background: var(--green-pale);
+      color: var(--green-dark);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    /* FEATURES */
+    .features {
+      background: white;
+      padding: 80px 48px;
+      border-top: 1px solid #E8F5E9;
+    }
+    .features-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--green-mid);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-size: 40px;
+      font-weight: 600;
+      text-align: center;
+      color: var(--green-dark);
+      margin-bottom: 12px;
+      letter-spacing: -1px;
+    }
+    .section-sub {
+      text-align: center;
+      color: var(--muted);
+      font-size: 16px;
+      margin-bottom: 56px;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .feature-card {
+      padding: 28px;
+      border-radius: 16px;
+      border: 1px solid #E8F5E9;
+      transition: all 0.2s;
+    }
+    .feature-card:hover {
+      box-shadow: 0 8px 32px rgba(45,106,79,0.12);
+      transform: translateY(-2px);
+      border-color: var(--green-light);
+    }
+    .feature-icon {
+      width: 48px; height: 48px;
+      background: var(--green-pale);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      margin-bottom: 16px;
+    }
+    .feature-title {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 8px;
+      color: var(--green-dark);
+    }
+    .feature-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+    /* CODE SECTION */
+    .code-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 48px;
+    }
+    .code-block {
+      background: #0D1117;
+      border-radius: 16px;
+      padding: 28px 32px;
+      overflow-x: auto;
+      border: 1px solid #21262D;
+      margin-top: 32px;
+    }
+    .code-block pre {
+      font-family: 'Fira Code', 'Courier New', monospace;
+      font-size: 14px;
+      line-height: 1.7;
+      color: #E6EDF3;
+    }
+    .code-comment { color: #8B949E; }
+    .code-tag { color: #7EE787; }
+    .code-attr { color: #79C0FF; }
+    .code-str { color: #A5D6FF; }
+    .code-key { color: #FF7B72; }
+
+    /* CTA */
+    .cta-section {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 50%, var(--green-mid) 100%);
+      padding: 80px 48px;
+      text-align: center;
+    }
+    .cta-section h2 {
+      font-family: 'Fraunces', serif;
+      font-size: 40px;
+      color: white;
+      margin-bottom: 14px;
+      letter-spacing: -1px;
+    }
+    .cta-section p { color: rgba(255,255,255,0.75); font-size: 17px; margin-bottom: 32px; }
+
+    /* Footer */
+    footer {
+      background: var(--green-dark);
+      padding: 24px 48px;
+      text-align: center;
+      color: rgba(255,255,255,0.5);
+      font-size: 13px;
+    }
+
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; padding: 48px 24px; }
+      .hero-visual { display: none; }
+      .features-grid { grid-template-columns: 1fr; }
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .hero h1 { font-size: 38px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon">🐾</div>
+      <span class="nav-logo-text">PawsFirst</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#">Services</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#" class="nav-cta">Book Appointment</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section>
+    <div class="hero">
+      <div class="hero-content">
+        <div class="hero-badge">🌿 AI-Powered Vet Assistant</div>
+        <h1>Expert pet care <em>anytime</em> you need it</h1>
+        <p>Get instant veterinary advice, book appointments, and keep your furry family members healthy — all through our intelligent chatbot, available 24/7.</p>
+        <div class="hero-buttons">
+          <button class="btn-primary" onclick="document.querySelector('.vcb-toggle')?.click()">
+            💬 Chat with our vet bot
+          </button>
+          <a href="#how-it-works" class="btn-secondary">Learn more</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card">
+          <div class="hero-card-header">
+            <div class="avatar">🏥</div>
+            <div>
+              <div style="font-weight:600;font-size:15px;color:var(--green-dark)">Clinic Dashboard</div>
+              <div style="font-size:12px;color:var(--muted)">Today's overview</div>
+            </div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-box">
+              <div class="stat-num">24</div>
+              <div class="stat-label">Appointments Today</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num">98%</div>
+              <div class="stat-label">Happy Patients</div>
+            </div>
+          </div>
+          <div style="font-size:12px;font-weight:600;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.5px">Upcoming</div>
+          <div class="upcoming-item">
+            <div class="upcoming-icon">🐕</div>
+            <div>
+              <div class="upcoming-name">Max — Golden Retriever</div>
+              <div class="upcoming-time">Annual checkup • 10:00 AM</div>
+            </div>
+            <div class="upcoming-status">Confirmed</div>
+          </div>
+          <div class="upcoming-item">
+            <div class="upcoming-icon">🐈</div>
+            <div>
+              <div class="upcoming-name">Luna — Persian Cat</div>
+              <div class="upcoming-time">Vaccination • 11:30 AM</div>
+            </div>
+            <div class="upcoming-status">Confirmed</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features" id="how-it-works">
+    <div class="features-inner">
+      <div class="section-label">What we offer</div>
+      <h2 class="section-title">Everything your pet needs</h2>
+      <p class="section-sub">Our AI-powered assistant handles your questions instantly, 24/7.</p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🩺</div>
+          <div class="feature-title">Instant Health Advice</div>
+          <div class="feature-desc">Ask about symptoms, medications, nutrition, and more. Get evidence-based answers powered by Gemini AI.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📅</div>
+          <div class="feature-title">Smart Appointment Booking</div>
+          <div class="feature-desc">Book appointments through natural conversation. The bot collects all needed info and confirms instantly.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💉</div>
+          <div class="feature-title">Vaccination Reminders</div>
+          <div class="feature-desc">Stay up to date with your pet's vaccination schedule. Ask what's due and when.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🚨</div>
+          <div class="feature-title">Emergency Triage</div>
+          <div class="feature-desc">Quickly identify signs of emergency and get guided to immediate care when your pet needs it most.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🗂️</div>
+          <div class="feature-title">Conversation History</div>
+          <div class="feature-desc">Chat history persists across sessions. Pick up where you left off anytime.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔌</div>
+          <div class="feature-title">Easy SDK Embed</div>
+          <div class="feature-desc">Add to any website with a single &lt;script&gt; tag. Fully customizable with config options.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Code embed example -->
+  <section class="code-section">
+    <div class="section-label">Developer Integration</div>
+    <h2 class="section-title" style="text-align:left">Embed in 3 lines</h2>
+    <p style="color:var(--muted);font-size:16px;margin-top:8px">Add the VetChatbot to any website with a single script tag. Optional config for personalization.</p>
+    <div class="code-block">
+      <pre><span class="code-comment">&lt;!-- Optional: configure before loading --&gt;</span>
+<span class="code-tag">&lt;script&gt;</span>
+  <span class="code-key">window</span>.VetChatbotConfig = {
+    <span class="code-attr">userId</span>: <span class="code-str">'user_123'</span>,
+    <span class="code-attr">userName</span>: <span class="code-str">'John Doe'</span>,
+    <span class="code-attr">petName</span>: <span class="code-str">'Buddy'</span>,
+    <span class="code-attr">clinicName</span>: <span class="code-str">'PawsFirst Clinic'</span>,
+    <span class="code-attr">apiUrl</span>: <span class="code-str">'https://your-api.com/api'</span>
+  };
+<span class="code-tag">&lt;/script&gt;</span>
+
+<span class="code-comment">&lt;!-- Load the SDK --&gt;</span>
+<span class="code-tag">&lt;script</span> <span class="code-attr">src</span>=<span class="code-str">"https://your-domain.com/chatbot.js"</span> <span class="code-attr">defer</span><span class="code-tag">&gt;&lt;/script&gt;</span></pre>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2>Ready to try it?</h2>
+    <p>Click the chat bubble in the bottom-right corner to talk to our veterinary AI.</p>
+    <button class="btn-primary" style="background:white;color:var(--green-dark);" onclick="document.querySelector('.vcb-toggle')?.click()">
+      💬 Open the Chatbot
+    </button>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 PawsFirst Veterinary Clinic. VetChatbot SDK Demo — Built with React, Node.js, MongoDB & Gemini AI.</p>
+  </footer>
+
+  <!-- =============================== -->
+  <!-- VETCHATBOT SDK INTEGRATION -->
+  <!-- =============================== -->
+  <script>
+    window.VetChatbotConfig = {
+      userName: 'Demo User',
+      petName: 'Buddy',
+      clinicName: 'PawsFirst Clinic',
+      apiUrl: 'http://localhost:3001/api'
+    };
+  </script>
+  <!-- In production, replace with your deployed URL: -->
+  <script src="http://localhost:3001/chatbot.js" defer></script>
+  <!-- =============================== -->
+
+</body>
+</html>

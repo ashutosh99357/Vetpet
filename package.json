@@ -1,0 +1,12 @@
+{
+  "name": "vet-chatbot-sdk",
+  "version": "1.0.0",
+  "description": "Veterinary Chatbot SDK — MERN + Gemini AI",
+  "scripts": {
+    "install:all": "cd backend && npm install && cd ../frontend && npm install",
+    "build:sdk": "cd frontend && npm run build",
+    "start:backend": "cd backend && npm start",
+    "dev:backend": "cd backend && npm run dev",
+    "dev": "npm run build:sdk && npm run dev:backend"
+  }
+}
